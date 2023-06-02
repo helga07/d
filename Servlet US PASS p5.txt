@@ -1,0 +1,65 @@
+HTTML
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="UTF-8">
+<Title>Welcome</Title>
+</HEAD>
+<BODY>
+<form action="Welcome">
+<input type ="text" size="20" name="fname">
+<input type ="text" size="20" name="lname">
+<input type ="submit">
+<input type ="reset">
+</form>
+
+</BODY>
+</HTML>
+
+
+
+
+Servlete page
+
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+
+@WebServlet("/Welcome")
+
+public class Welcome extends HttpServlet
+{
+ @Override
+public void doGet(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException
+{
+	doPost(req,res);
+}
+ @Override
+public void doPost(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException
+{
+	process(req,res);
+}
+
+ void process (HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException
+{
+	String fname=req.getParameter("fname");
+	String lname=req.getParameter("lname");
+	
+	res.setContentType("text/html");
+	PrintWriter out= res.getWriter();
+	out.println("<html><body>");
+	
+	out.println("<h1>Welcome to  MESCOE</h1>");
+	
+	out.println("<h4>"+fname+"       "+lname+"</h4>");
+	
+	out.println("<hr>");
+	out.println("</body></html>");
+	out.close();
+}
+}
+
+

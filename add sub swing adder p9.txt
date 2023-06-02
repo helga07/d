@@ -1,0 +1,91 @@
+package the10;
+
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class SwingAdder extends JFrame implements ActionListener {
+    private JTextField firstNumberField;
+    private JTextField secondNumberField;
+    private JTextField resultField;
+
+    public SwingAdder() {
+        setTitle("Swing Adder");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 200);
+        setLayout(new GridLayout(4, 2));
+
+        JLabel firstNumberLabel = new JLabel("First Number: ");
+        firstNumberField = new JTextField();
+        JLabel secondNumberLabel = new JLabel("Second Number: ");
+        secondNumberField = new JTextField();
+        JLabel resultLabel = new JLabel("Result: ");
+        resultField = new JTextField();
+        resultField.setEditable(false);
+
+        JButton addButton = new JButton("ADD");
+        addButton.addActionListener(this);
+        JButton subButton = new JButton("SUB");
+        subButton.addActionListener(this);
+        JButton clearButton = new JButton("CLEAR");
+        clearButton.addActionListener(this);
+
+        add(firstNumberLabel);
+        add(firstNumberField);
+        add(secondNumberLabel);
+        add(secondNumberField);
+        add(resultLabel);
+        add(resultField);
+        add(addButton);
+        add(subButton);
+        add(clearButton);
+
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("ADD")) {
+            performAddition();
+        } else if (e.getActionCommand().equals("SUB")) {
+            performSubtraction();
+        } else if (e.getActionCommand().equals("CLEAR")) {
+            clearFields();
+        }
+    }
+
+    private void performAddition() {
+        try {
+            int firstNumber = Integer.parseInt(firstNumberField.getText());
+            int secondNumber = Integer.parseInt(secondNumberField.getText());
+            int result = firstNumber + secondNumber;
+            resultField.setText(String.valueOf(result));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid input! Please enter valid integers.");
+        }
+    }
+
+    private void performSubtraction() {
+        try {
+            int firstNumber = Integer.parseInt(firstNumberField.getText());
+            int secondNumber = Integer.parseInt(secondNumberField.getText());
+            int result = firstNumber - secondNumber;
+            resultField.setText(String.valueOf(result));
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid input! Please enter valid integers.");
+        }
+    }
+
+    private void clearFields() {
+        firstNumberField.setText("");
+        secondNumberField.setText("");
+        resultField.setText("");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(SwingAdder::new);
+    }
+}
